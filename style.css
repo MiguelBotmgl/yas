@@ -1,0 +1,223 @@
+/* Estilos Globais e Cores Principais */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    background-color: #333; /* Fundo CINZA (lightgray) */
+    color: #FFFFFF; /* Letras ROXAS (darkorchid) */
+    overflow-x: hidden; /* Previne scroll horizontal */
+    line-height: 1.6;
+}
+
+/* Tela Inicial */
+#initial-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Tela cheia */
+    background: linear-gradient(135deg, #ffc0cb, #ff7f50); /* Gradiente rosa/laranja para tela inicial */
+    transition: opacity 0.5s ease-out;
+}
+
+#initial-screen.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.heart-button {
+    background-color: hotpink;
+    color: white;
+    border: none;
+    padding: 25px 40px; /* Aumentei o padding */
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3em; /* Aumentei a fonte */
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    text-align: center;
+}
+
+.heart-button:hover {
+    background-color: #FF1493; /* Darker pink */
+    transform: scale(1.05); /* Leve aumento no hover */
+}
+
+.heart-button:active {
+    transform: scale(0.98);
+}
+
+.heart-icon-visual {
+    margin-right: 12px;
+    font-size: 1.6em; /* Coração um pouco maior */
+}
+
+/* Classe para esconder elementos */
+.hidden {
+    display: none !important;
+}
+
+/* Conteúdo Principal */
+#main-content {
+    padding: 25px;
+    text-align: center;
+    opacity: 0;
+    animation: fadeInContent 1s ease-in-out forwards;
+    animation-delay: 0.5s; /* Pequeno delay para o conteúdo aparecer após a tela inicial sumir */
+}
+
+@keyframes fadeInContent {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Timer do Relacionamento */
+.love-timer {
+    margin: 20px 0 40px; /* Mais margem inferior */
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.love-timer h2 {
+    font-size: 1.8em; /* Maior */
+    margin-bottom: 10px;
+    color: #FFFFFF; /* Roxo, já definido no body mas pode ser específico */
+}
+
+#relationship-time {
+    font-size: 1.4em; /* Maior */
+    font-weight: bold;
+    color: #FFFFFF; /* Indigo, um roxo mais escuro para o tempo */
+    min-height: 50px; /* Para evitar pulos de layout enquanto calcula */
+}
+
+/* Container do Spotify */
+.spotify-embed-container {
+    width: 95%;
+    max-width: 380px; /* Um pouco maior */
+    margin: 30px auto 40px;
+    background-color: #282828; /* Fundo escuro para o container */
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    overflow: hidden; /* Garante que o iframe respeite o border-radius */
+}
+
+.spotify-embed-container iframe {
+    display: block; /* Remove espaço extra */
+    border: none; /* Remove qualquer borda padrão do iframe */
+}
+
+/* Slideshow de Fotos */
+.slideshow-container {
+    width: 90%; /* Mantém a largura relativa */
+    max-width: 300px; /* Pode ser necessário ajustar a largura máxima para um formato vertical */
+    aspect-ratio: 3/4; /* <<<---- ALTERAÇÃO AQUI para uma proporção vertical */
+    margin: 30px auto 40px;
+    overflow: hidden;
+    position: relative;
+    border: 3px solid #6A0DAD;
+    border-radius: 12px;
+    background-color: #333;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* A regra para .slideshow-container .slide continua a mesma: */
+.slideshow-container .slide {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Garante que a imagem cubra o espaço, cortando se necessário */
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.slideshow-container .slide.active {
+    opacity: 1;
+}
+
+/* Chuva de Corações */
+.hearts-rain-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Para não interferir com cliques */
+    overflow: hidden;
+    z-index: -1; /* Para ficar atrás do conteúdo mas acima do fundo */
+}
+
+.heart {
+    position: absolute;
+    width: 20px; /* Tamanho base do coração */
+    height: 20px;
+    opacity: 0;
+    animation: fall 7s linear infinite; /* Animação mais longa */
+    transform-origin: center center;
+    /* background-color: transparent; A forma será feita pelos pseudo-elementos */
+}
+
+.heart::before,
+.heart::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: hotpink; /* Cor dos corações da chuva */
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(255,105,180,0.7); /* Pequeno brilho */
+}
+
+.heart::before {
+    top: -10px;
+    left: 0;
+    /* transform: rotate(-45deg); /* Forma de coração tradicional */
+    /* transform-origin: 0 100%; */
+}
+
+.heart::after {
+    left: 10px;
+    top: 0;
+    /* transform: rotate(45deg); */
+    /* transform-origin: 100% 0; */
+}
+/* Simplificando a forma do coração para os pseudo-elementos (dois círculos que se sobrepõem e o pai rotacionado) */
+.heart {
+    transform: rotate(-45deg); /* Rotaciona o container do coração */
+}
+.heart::before { top: -10px; left: 0; } /* Círculo de cima/esquerda */
+.heart::after { top: 0; left: 10px; }    /* Círculo de cima/direita */
+
+
+@keyframes fall {
+    0% {
+        top: -15%; /* Começa um pouco mais acima */
+        opacity: 1;
+        transform: translateY(0) rotate(-45deg) scale(1);
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        top: 115%; /* Termina um pouco mais abaixo */
+        opacity: 0;
+        transform: translateY(100vh) rotate(calc(-45deg + var(--random-rotate, 0deg))) scale(0.5); /* Rotaciona e diminui */
+    }
+}
+
+/* Rodapé */
+footer {
+    margin-top: 60px; /* Mais espaço acima */
+    padding: 25px;
+    background-color: #333333; /* Fundo escuro para o rodapé */
+    color: #FFFFFF; /* Texto BRANCO para bom contraste */
+    text-align: center;
+    font-style: italic;
+    font-size: 1.1em;
+}
